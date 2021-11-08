@@ -22,3 +22,9 @@ Travail à faire pour le lundi 01/novembre
 - Les graphes.
 ----------------------------------------------------------
 
+## 08-11-2021 
+# N°2
+Mercredi à 13h30 a la BU pour travailler sur le pratical 3
+- Avant le mercredi faire les deux premier exercices
+- L'exercice 2 se fera ensemble
+- Les autres on les repartira.
