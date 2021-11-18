@@ -48,9 +48,8 @@ def preprocesDataFile(fileName):
     return docListNum, list_doc
 
 def clean(text1,use_stopword_stemmer):
-    remove_w = "_:/!?#^*~&()[]{}';$%|,.-"
     stopwords = get_stop_words('english')
-    full_text = text1.lower().replace('\\n', '').strip(remove_w).replace("''",' ').replace("'",' ')
+    full_text = text1.lower().replace('\\n', '').replace("'",' ')
     full_text = re.sub(r'[^\w\s]', '', full_text) # Remove all punctuation
     if(use_stopword_stemmer):
         full_text = [stemmer.stem(word) 
@@ -84,8 +83,6 @@ def countWord(words):
     return word_count
 
 def countWordIntoDocs(dico, docno, posting):
-    docname = docno
-    
     for word, frequence in dico.items():
         posting.setdefault(word,[]).append((docname,frequence)) ### Remplace les lignes de commande suivante:
         """
@@ -136,8 +133,8 @@ def plot_datas(data, title, label_x, label_y):
     
 ## Fonction de traintement du texte  
 def text_mining(fileName,use_stopword_stemmer=bool()):
-    start = time.time()
     docListNum, list_doc = preprocesDataFile(fileName)
+    start = time.time()
     posting_list = {}
     file_number = fileName.split('/')[1].split('-',1)
     dl = list()
@@ -148,10 +145,9 @@ def text_mining(fileName,use_stopword_stemmer=bool()):
         lt = text_clean.split()
         current_dico = countWord(lt)
         posting_list = countWordIntoDocs(current_dico, list_doc[i], posting_list)
-    end = time.time()
-    elapsed = end - start
-    tf = term_len(posting_list)
-    file_indexing_infos=(round(elapsed,3),tf)
+    print(time.time()-start)
+    #tf = term_len(posting_list)
+    #file_indexing_infos=(round(elapsed,3),tf)
     return posting_list, list_terms
 
 def smart_ltn(posting_list,n, c_tf):
