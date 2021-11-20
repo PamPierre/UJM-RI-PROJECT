@@ -95,7 +95,10 @@ def countWordIntoDocs(dico, docno, posting):
     return posting
 
 def doc_len(list_terms):
-    dl = [(doc_n, len(len_doc)) for doc_n,len_doc in list_terms.items()]
+    dl = {}
+    for doc_n, len_doc in list_terms.items():
+        dl[doc_n] = len(len_doc)
+    #dl = [(doc_n, len(len_doc)) for doc_n,len_doc in list_terms.items()]
     return dl
 
 def vocabulary_size(posting_list):
@@ -150,20 +153,6 @@ def text_mining(fileName,use_stopword_stemmer=bool()):
     #file_indexing_infos=(round(elapsed,3),tf)
     return posting_list, list_terms
 
-def smart_ltn(posting_list,n, c_tf):
-    #=(1+LOG(tf))*LOG(n/c_tl)
-    ltn = {}
-    for key, value in posting_list.items():
-        for v in value:
-            tf = 1+math.log(v[1])
-        for v in c_tf[key]:
-            c_tl = v[1]
-        if c_tl==0:
-            ltn[key] = 0
-        else:
-            ltn[key] = tf*math.log(n/c_tl)
-    ltn_sum = sum(ltn.values())
-    return ltn_sum
 
 def get_statistics(posting_list,list_terms):
     stat = {}
