@@ -33,6 +33,7 @@ def list_file_data(nom_directory):
 def preprocesFile(fileName):
     if '.gz' in fileName:
         file_content = gzip.open(fileName, 'rb')
+        file_content = file_content.read()
     elif ".zip" in fileName:
         name = fileName.split('/')[1].replace('.zip','')
         with ZipFile(fileName) as myzip:
@@ -84,7 +85,7 @@ def countWord(words):
 
 def countWordIntoDocs(dico, docno, posting):
     for word, frequence in dico.items():
-        posting.setdefault(word,[]).append((docname,frequence)) ### Remplace les lignes de commande suivante:
+        posting.setdefault(word,[]).append((docno,frequence)) ### Remplace les lignes de commande suivante:
         """
         if not word in list(posting.keys()):
             posting[word] = [(docname, frequence)]
@@ -108,7 +109,6 @@ def term_len(posting_list):
 def collection_term_freq(posting_list):
     c_size={}
     dl = {}
-    print(posting_list)
     for term,values in posting_list.items(): # get the term
         somme=0
         for v in values:
