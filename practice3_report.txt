@@ -1,0 +1,90 @@
+For the exercice 1 wa have just use the function define on the practice2.py
+Output : 
+{'gottschalk': [('10003934', 3), ('1136200', 1), ('2304859', 2), ('2614029', 1), ('775', 1)], 'benson1000393419790463220080313t060302zeastlaw1046972united': [('10003934', 1)]}
+
+Exercice2
+We define a statistique functionne on a practical2.py and send the statistiques in a dataframe to convert it on excel with the file name statistique.xlsx
+Output : 
+Stat(tf) = [('gottschalk', 10),
+('benson1000393419790463220080313t060302zeastlaw1046972united', 59),
+ ('states', 6),
+ ('patent', 6),
+ ('case', 4),
+ ('lawflagged', 10),
+ ('us', 2)]
+
+Exercice3
+idem for the Exercice2 with the file name statistique_stopword_stemming.xlsx
+
+You can see the result on the file statistique_practical3.xlsx
+
+Exercice 4: 
+We define the function smart_ltn with parameter the posting and the total number of the collection to compute the smart ltn
+Output : {'10003934': [('gottschalk', 15.909806058402152),
+  ('benson1000393419790463220080313t060302zeastlaw1046972unit',
+   9.190545744648004),
+  ('state', 2.7714681585705048),
+  ('patent', 14.494559290948605),
+  ('case', 4.5886788759190695),
+  ('lawflag', 8.091933455979893),
+  ('us', 4.548960314438944),
+  ('suprem', 12.14198565060597),
+  ('court', 9.959109673734126),
+  ('articles1972', 9.190545744648004),
+  ('lawcomputerrel', 8.497398564088058)}
+
+Exercice 5:
+we define the rsv_score to compute the and score it by docno
+Ouput : ('4698944', 449.68585544312054),
+ ('444250', 398.936024569417),
+ ('33139', 293.95143902325106),
+ ('9071052', 264.3803997107955)
+ 
+Exercice 6:
+Same principe and normalise the ltn to get great result
+Output: {'10003934': [('gottschalk', 0.0047446390659275275),
+  ('benson1000393419790463220080313t060302zeastlaw1046972unit',
+   0.0027408142008256715),
+  ('state', 0.0008265101439236829),
+  ('patent', 0.00432258268911572),
+  ('case', 0.0013684406318821333),
+  ('lawflag', 0.002413184890701556),
+  ('us', 0.001356595720778297),
+  ('suprem', 0.00362099570820176),
+  ('court', 0.0029700161426481474),
+  ('articles1972', 0.0027408142008256715),
+  ('lawcomputerrel', 0.002534103120926277),
+  ('lawunit', 0.0019139698812280933),
+  ('casesgottschalk', 0.0027408142008256715),
+  ('benson', 0.003475321755242966),
+  ('unit', 0.0008330920616288191),
+  ('statesargu', 0.0022064738108021615)}
+  
+ 
+Exercice 7:
+get the rsv for the same query with the same function
+Output : 
+('632489', 0.14157368582315297),
+ ('17247558', 0.07700919674375306),
+ ('185201', 0.06994668365861341)
+ 
+Exercice 8 :
+We build the bm25 formul by separate the tf and idf part and compute it before to do the dot product for each term
+tf_part
+Output :
+{'10003934': [('gottschalk', 1.7064115332840346)]}
+{'10003934': [('gottschalk', 1.7064115332840346)], '1136200': [('gottschalk', 0.9949812422609668)]}
+{'10003934': [('gottschalk', 1.7064115332840346)], '1136200': [('gottschalk', 0.9949812422609668)], '2304859': [('gottschalk', 1.2043950850015306)]}
+{'10003934': [('gottschalk', 1.7064115332840346)], '1136200': [('gottschalk', 0.9949812422609668)], '2304859': [('gottschalk', 1.2043950850015306)], '2614029': [('gottschalk', 1.2161514295193818)]}
+{'10003934': [('gottschalk', 1.7064115332840346)], '1136200': [('gottschalk', 0.9949812422609668)], '2304859': [('gottschalk', 1.2043950850015306)], '2614029': [('gottschalk', 1.2161514295193818)], '775': [('gottschalk', 0.30238193070833985)]}
+
+id_part:
+Output:
+{'gottschalk': [7.485338550710489], 'benson1000393419790463220080313t060302zeastlaw1046972unit': [8.785029635647312], 'state': [0.5297455491272928], 'patent': [3.228892425212907], 'case': [1.1631641958801477], 'lawflag': [7.937527745675111], 'us': [1.4110186900394168], 'suprem': [4.102202842103045], 'court': [2.8752414203386865], 'articles1972': [8.785029635647312], 'lawcomputerrel': [8.27410200229233], 'lawunit': [6.3856031253100625], 'casesgottschalk': [8.785029635647312], 'benson': [5.536055200051288], 'unit': [0.6506845678193545], 'statesargu': [7.318182414817517], 'octob': [1.839386076799762], '1972decid': [8.785029635647312], 'novemb': [1.9877062171044928]}
+
+Excercice 9 :
+For this exercice we have faced difficulties on the excecution because of the huge number of values so here we don't have an output to show.
+
+
+
+
