@@ -23,7 +23,7 @@ def list_file_data(nom_directory):
     for f in os.listdir(nom_directory):
         if os.path.isdir(f): # si f est un dossier
             os.chdir(f) # On va lister son contenu
-            parse()
+            #parse()
             os.chdir('../') # On revient au répertoire précédent
         else:
             myListFile.append(f)
@@ -39,6 +39,9 @@ def preprocesFile(fileName):
         with ZipFile(fileName) as myzip:
             with myzip.open(name) as myfile:
                 file_content=myfile.read()
+    else :
+        with open(fileName) as file:
+            file_content = file.read()
     return file_content
 
 
