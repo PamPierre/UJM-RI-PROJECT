@@ -23,7 +23,7 @@ def list_file_data(nom_directory):
     for f in os.listdir(nom_directory):
         if os.path.isdir(f): # si f est un dossier
             os.chdir(f) # On va lister son contenu
-            parse()
+            #parse()
             os.chdir('../') # On revient au répertoire précédent
         else:
             myListFile.append(f)
@@ -33,11 +33,15 @@ def list_file_data(nom_directory):
 def preprocesFile(fileName):
     if '.gz' in fileName:
         file_content = gzip.open(fileName, 'rb')
+        file_content = file_content.read()
     elif ".zip" in fileName:
         name = fileName.split('/')[1].replace('.zip','')
         with ZipFile(fileName) as myzip:
             with myzip.open(name) as myfile:
                 file_content=myfile.read()
+    else :
+        with open(fileName) as file:
+            file_content = file.read()
     return file_content
 
 
@@ -84,7 +88,7 @@ def countWord(words):
 
 def countWordIntoDocs(dico, docno, posting):
     for word, frequence in dico.items():
-        posting.setdefault(word,[]).append((docname,frequence)) ### Remplace les lignes de commande suivante:
+        posting.setdefault(word,[]).append((docno,frequence)) ### Remplace les lignes de commande suivante:
         """
         if not word in list(posting.keys()):
             posting[word] = [(docname, frequence)]
@@ -94,7 +98,10 @@ def countWordIntoDocs(dico, docno, posting):
     return posting
 
 def doc_len(list_terms):
-    dl = [(doc_n, len(len_doc)) for doc_n,len_doc in list_terms.items()]
+    dl = {}
+    for doc_n, len_doc in list_terms.items():
+        dl[doc_n] = len(len_doc)
+    #dl = [(doc_n, len(len_doc)) for doc_n,len_doc in list_terms.items()]
     return dl
 
 def vocabulary_size(posting_list):
@@ -108,7 +115,6 @@ def term_len(posting_list):
 def collection_term_freq(posting_list):
     c_size={}
     dl = {}
-    print(posting_list)
     for term,values in posting_list.items(): # get the term
         somme=0
         for v in values:
@@ -150,20 +156,6 @@ def text_mining(fileName,use_stopword_stemmer=bool()):
     #file_indexing_infos=(round(elapsed,3),tf)
     return posting_list, list_terms
 
-def smart_ltn(posting_list,n, c_tf):
-    #=(1+LOG(tf))*LOG(n/c_tl)
-    ltn = {}
-    for key, value in posting_list.items():
-        for v in value:
-            tf = 1+math.log(v[1])
-        for v in c_tf[key]:
-            c_tl = v[1]
-        if c_tl==0:
-            ltn[key] = 0
-        else:
-            ltn[key] = tf*math.log(n/c_tl)
-    ltn_sum = sum(ltn.values())
-    return ltn_sum
 
 def get_statistics(posting_list,list_terms):
     stat = {}
