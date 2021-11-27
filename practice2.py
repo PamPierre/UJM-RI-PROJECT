@@ -51,10 +51,30 @@ def preprocesDataFile(fileName):
     list_doc = re.findall('<doc><docno>(.*?)</docno>', str(full_text).strip())
     return docListNum, list_doc
 
-def clean(text1,use_stopword_stemmer):
+def clean(text1,use_stem,use_stopword):
     stopwords = get_stop_words('english')
     full_text = text1.lower().replace('\\n', '').replace("'",' ')
     full_text = re.sub(r'[^\w\s]', '', full_text) # Remove all punctuation
+    text = list()
+    for word in full_text.split():
+        if len(word)>1 and not word.isnumeric() and word.isalnum():
+            if not use_stopword:
+                if use_stem:
+                    text.append(stemmer.stem(word))
+                else:
+                    text.append(word)
+            elif word not in stopwords:
+                if use_stem:
+                    text.append(stemmer.stem(word))
+                else:
+                    text.append(word)
+    full_text = text
+    
+    """
+                    
+    full_text = [stemmer.stem(word) if use_stem else word 
+                     for word in full_text.split() 
+                     ]
     if(use_stopword_stemmer):
         full_text = [stemmer.stem(word) 
                      for word in full_text.split() 
@@ -69,6 +89,8 @@ def clean(text1,use_stopword_stemmer):
                      if len(word)>1  
                      and not word.isnumeric()
                      and word.isalnum()] 
+    """
+    
     return ' '.join(full_text)
 
 
@@ -138,23 +160,22 @@ def plot_datas(data, title, label_x, label_y):
     plt.show()
     
 ## Fonction de traintement du texte  
-def text_mining(fileName,use_stopword_stemmer=bool()):
+def text_mining(fileName,use_stem=bool(),use_stopword=bool()):
     docListNum, list_doc = preprocesDataFile(fileName)
     start = time.time()
     posting_list = {}
     file_number = fileName.split('/')[1].split('-',1)
     dl = list()
     for i in range(len(list_doc)):
-        text_clean = clean(docListNum[i][1],use_stopword_stemmer)
+        text_clean = clean(docListNum[i][1],use_stem,use_stopword)
         list_terms[list_doc[i]] = text_clean.split() # Here we create a dictionary of Here we create a dictionary of 
                                                                               # each docments with its terms
         lt = text_clean.split()
         current_dico = countWord(lt)
         posting_list = countWordIntoDocs(current_dico, list_doc[i], posting_list)
-    print(time.time()-start)
     #tf = term_len(posting_list)
     #file_indexing_infos=(round(elapsed,3),tf)
-    return posting_list, list_terms
+    return posting_list, list_terms,(time.time()-start)
 
 
 def get_statistics(posting_list,list_terms):
