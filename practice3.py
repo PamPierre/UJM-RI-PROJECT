@@ -58,25 +58,19 @@ def smart_ltc(smart_ltn):
 # In[12]:
 
 
-def tf_part(posting_list,dl,n):
+def tf_part(posting_list,dl,n,k,b):
     #(tf*(k+1))/(k*((1-b)+b*(dl/avdl))+tf)
     #[  1     ]             [   2   ]
     #              [      3         ]
     #            [         4            ]   
-    k = 1.0
-    b = 0.5
     dl_ = sum([dl[x] for x in dl.keys()])
     doc_len = 0
     avdl = dl_/n
-    #print(avdl)
-    #avdl = 20
     tf_part_val = {}
     for term, value in posting_list.items():
         for v in value:
-            #if not term in v
             tf = v[1]
             doc_len = dl[v[0]]
-            #doc_len = [doc_l for docno,doc_l in dl if docno==v[0]]
             bloc_1 = tf*(k+1)
             bloc_2 = doc_len/avdl
             bloc_3 = k * ((1-b) + b * bloc_2)
@@ -84,12 +78,6 @@ def tf_part(posting_list,dl,n):
             tf_part_val.setdefault(v[0],[]).append((term,bloc_1/bloc_4)) 
     return tf_part_val
 
-
-# In[12]:
-
-
-#dl = stat_2['df']
-#tf_part(pl_2, stat_2['df'],stat_2['n_doc'])
 
 
 # In[14]:
@@ -108,36 +96,25 @@ def idf_part(posting_list,df_,n):
     return idf_part_val
 
 
-# In[55]:
 
 
-#idf_part(pl_2,stat_2['colec_freq'], stat_2['n_doc'])
-
-
-# In[15]:
-
-
-def bm25(posting_list, stat):
-    tf_part_ = tf_part(posting_list,stat['df'],stat['n_doc'])
+def bm25(posting_list, stat,k,b):
+    tf_part_ = tf_part(posting_list,stat['df'],stat['n_doc'],k,b)
 
     idf_part_ = idf_part(posting_list,stat['colec_freq'], stat['n_doc'])
     bm25_val = {}
-    # doc 1 : ('a' , tf_part_[a]*idf[a])
     for doc, tf_value in tf_part_.items():
         for tf in tf_value:
             bm25_val.setdefault(doc,[]).append((tf[0], tf[1]*idf_part_[tf[0]][0]))     
     return bm25_val
     
 
-def weinting_function(pl, stat):
+def weinting_function(pl, stat,k,b):
     ltn = smart_ltn(pl,stat['n_doc'], stat['colec_freq'])
     ltc = smart_ltc(ltn)
-    bm25_val = bm25(pl,stat)
+    bm25_val = bm25(pl,stat,k,b)
    
     return ltn,ltc,bm25_val
-# ## Exercise 9: Ranked Retrieval (BM25 weighting) 
-
-# In[16]:
 
 
 
