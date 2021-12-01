@@ -1,0 +1,37 @@
+Exercise 4: Stemmer, stop-words:
+
+****************** Extraction of runs(ltn,ltc,BM25) With stopword && Without stemmer ************************
+
+------> Execution time to get posting list : 1min12s
+
+------> Execution time to get a ranked list of 1,500 articles for all the queries(the time may be less than that because it depends on the computer's hardware):
+		---> ltn time  : 24.94s
+		---> ltc time  : 14.66s
+		---> BM25 time : 16.03s
+
+------> Ltn Run :
+	------> Execution time to build a run for ltn : 0.095s
+	------> Ltn Run result :
+	2009011 Q0 22478 1 9.497 DjibrilMohamedOmaimaDouae /article[1]
+	2009011 Q0 3951433 2 8.1569 DjibrilMohamedOmaimaDouae /article[1]
+	2009011 Q0 4141841 3 7.9568 DjibrilMohamedOmaimaDouae /article[1]
+	2009011 Q0 22594 4 7.821 DjibrilMohamedOmaimaDouae /article[1]
+	2009011 Q0 3946850 5 7.6382 DjibrilMohamedOmaimaDouae /article[1]
+
+------> Ltc Run :
+	------> Execution time to build a run for ltc : 0.134s
+	------> Ltc Run result :
+	2009011 Q0 15714978 1 0.2444 DjibrilMohamedOmaimaDouae /article[1]
+	2009011 Q0 2315207 2 0.2239 DjibrilMohamedOmaimaDouae /article[1]
+	2009011 Q0 13182944 3 0.2057 DjibrilMohamedOmaimaDouae /article[1]
+	2009011 Q0 6939989 4 0.1984 DjibrilMohamedOmaimaDouae /article[1]
+	2009011 Q0 1854492 5 0.1982 DjibrilMohamedOmaimaDouae /article[1]
+
+------> BM25 Run:
+	------> Execution time to build a run for BM25: 0.098s
+	------> BM25 Run result :
+	2009011 Q0 460499 1 5.88362 DjibrilMohamedOmaimaDouae /article[1]
+	2009011 Q0 22478 2 5.83793 DjibrilMohamedOmaimaDouae /article[1]
+	2009011 Q0 212394 3 5.09704 DjibrilMohamedOmaimaDouae /article[1]
+	2009011 Q0 10323757 4 5.07713 DjibrilMohamedOmaimaDouae /article[1]
+	2009011 Q0 5538293 5 5.00911 DjibrilMohamedOmaimaDouae /article[1]
