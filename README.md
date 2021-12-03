@@ -22,3 +22,14 @@ Travail à faire pour le lundi 01/novembre
 - Les graphes.
 ----------------------------------------------------------
 
+
+## Work sharing:
+@Djibril ===> With stopword && With stemmer
+@Omeima ===> With stopword && No stemmer
+@Doua ===> No stopword && With stemmer
+@Moh ===> No stopword && No stemmer
+
+## Work to do
+- Fix the bug at the start of the indexing time 95000 lines on 10500
+- Compute MaGP and PgP
+- Create project with classe
