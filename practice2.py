@@ -23,7 +23,6 @@ def list_file_data(nom_directory):
     for f in os.listdir(nom_directory):
         if os.path.isdir(f): # si f est un dossier
             os.chdir(f) # On va lister son contenu
-            parse()
             os.chdir('../') # On revient au répertoire précédent
         else:
             myListFile.append(f)
@@ -194,6 +193,7 @@ def scoring_doc(query_clean, pl, lt):
     return rsv
 
 ### Cell to initialise variable.
+"""
 directory = "Practice_02_data/"
 list_data = list_file_data(directory)
 list_data = sorted(list_data)
@@ -204,7 +204,8 @@ file_indexing_infos = {}
 dl = {}
 tf = {}
 stopwords = get_stop_words('english')
+
+
+"""
 list_terms = {}
 stemmer = PorterStemmer()
-
-
