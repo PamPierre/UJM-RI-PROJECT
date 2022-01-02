@@ -1,4 +1,4 @@
-from functions.file_process import *
+from file_process import *
 from nltk.stem import PorterStemmer
 from stop_words import get_stop_words
 
