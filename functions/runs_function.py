@@ -61,7 +61,6 @@ def build_run_file(run_id, wf_score, index, use_stem, use_stopword, k, b):
         k = 0.0
         b = 0.0
     run_file_name, run_id = create_run_file(run_id, index, use_stem, use_stopword, k, b)
-    print(len(wf_score))
     for score in wf_score:
         print(len(score))
         for i in range(len(score)):
