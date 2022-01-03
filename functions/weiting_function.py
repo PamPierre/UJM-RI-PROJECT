@@ -42,13 +42,11 @@ def smart_ltc(smart_ltn):
 
 
 
-def tf_part(posting_list,dl,n):
+def tf_part(posting_list,dl,n,k,b):
     #(tf*(k+1))/(k*((1-b)+b*(dl/avdl))+tf)
     #[  1     ]             [   2   ]
     #              [      3         ]
     #            [         4            ]
-    k = 1.0
-    b = 0.5
     dl_ = sum([dl[x] for x in dl.keys()])
     doc_len = 0
     avdl = dl_/n
@@ -67,6 +65,7 @@ def tf_part(posting_list,dl,n):
             bloc_4 = bloc_3+tf
             tf_part_val.setdefault(v[0],[]).append((term,bloc_1/bloc_4))
     return tf_part_val
+
 
 def idf_part(posting_list,df_,n):
     #log((n-df+0.5)/(df+0.5))
@@ -91,9 +90,26 @@ def bm25(posting_list, stat):
             bm25_val.setdefault(doc, []).append((tf[0], tf[1] * idf_part_[tf[0]][0]))
     return bm25_val
 
+
+def bm25(posting_list, stat,k,b):
+    tf_part_ = tf_part(posting_list,stat['df'],stat['n_doc'],k,b)
+
+    idf_part_ = idf_part(posting_list,stat['colec_freq'], stat['n_doc'])
+    bm25_val = {}
+    for doc, tf_value in tf_part_.items():
+        for tf in tf_value:
+            bm25_val.setdefault(doc,[]).append((tf[0], tf[1]*idf_part_[tf[0]][0]))     
+    return bm25_val
+    
+
+def weinting_function(pl, stat,k,b):
+    ltn = smart_ltn(pl,stat['n_doc'], stat['colec_freq'])
+    ltc = smart_ltc(ltn)
+    bm25_val = bm25(pl,stat,k,b)
+   
+    return ltn,ltc,bm25_val
+
 def reverse_score(score_result):
     score = sorted(score_result, reverse=False)
     score = [(doc, result) for result, doc in score]
     return score
-
-

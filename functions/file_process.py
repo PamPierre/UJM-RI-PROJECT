@@ -47,7 +47,7 @@ def splitDocs(fileDoc, list_terme):
       sec = soup.find_all('sec')
       #text =  soup.get_text()
       list_terme[id]=sec  # Pour chaque article on recuper les sections
-      print(sec)
+     
     return list_terme
 
 def splitDocs1(fileDoc):
@@ -64,6 +64,21 @@ def splitDocs1(fileDoc):
 
 
 
+
+def splitDocs2(fileDoc, list_terme):
+  content = []
+  # Read the XML file
+  with open(fileDoc, "r",encoding='utf-8') as file:
+      # Read each line in the file, readlines() returns a list of lines
+      content = file.readlines()
+      # Combine the lines in the list into a string
+      content = " ".join(content)
+      soup = BeautifulSoup(content, "xml")
+      id = str(soup.find_all('id')[0]).strip('</id>')
+      #sec = soup.find_all('sec')
+      text =  soup.get_text()
+      list_terme[id]=text # Pour chaque article on recuper les sections
+  return list_terme
 
 
 

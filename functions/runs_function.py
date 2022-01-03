@@ -2,14 +2,15 @@ import time
 
 import random
 from stop_words import get_stop_words
-from functions.weiting_function import *
+from weiting_function import *
+
 def score(query_list,rsv_wf):
     team_name = "DjibrilMohamedOmaimaDouae"
     score = []
     for query in query_list:
         query = query.split(' ', 1)
         score.append(result_query(query[0], rsv_score(query[1], rsv_wf), team_name))
-    return score #,(len(score) * len(score[0]))
+    return score
 
 def result_query(num_query, rsv_result,team_name):
     start = time.time()
@@ -20,13 +21,13 @@ def result_query(num_query, rsv_result,team_name):
     rsv_r = [(num_query,
               'Q0', x[i][0],i+1,
               round(x[i][1],5), team_name,
-              '/article[1]\n') for i in range(len(x))]
+              '/article[1]') for i in range(len(x))]
     return rsv_r
 
 
 # wf_index is [0,1,2]==['ltn','ltc','bm25']
 def create_run_file(run_id, wf_index, use_stem, use_stopword, k, b):
-    run_directory = "assets/runs_result/"
+    run_directory = "../assets/runs_result/"
     run_id += 1
     team_name = "DjibrilMohamedOmaimaDouae"
     stem = ['nostem', 'porter', 'lovins', 'paice']
