@@ -31,7 +31,7 @@ def clean(text1, use_stem, use_stopword):
     full_text = re.sub(r'[^\w\s]', '', full_text)  # Remove all punctuation
     text = list()
     for word in full_text.split():
-        if len(word) > 1 and word.isalpha():
+        if len(word) > 2 and word.isalpha():
             if not use_stopword:
                 if use_stem:
                     text.append(stemmer.stem(word))

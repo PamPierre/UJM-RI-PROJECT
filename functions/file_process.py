@@ -30,7 +30,7 @@ def preprocesFile(fileName):
             with myzip.open(name) as myfile:
                 file_content=myfile.read()
     else :
-        with open(fileName) as file:
+        with open(fileName, encoding="utf8") as file:
             file_content = file.read()
     return file_content
 
