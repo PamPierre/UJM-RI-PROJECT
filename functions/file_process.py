@@ -20,7 +20,6 @@ def list_file_data(nom_directory):
     return myListFile
 
 def preprocesFile(fileName):
-    print(fileName)
     if '.gz' in fileName:
         file_content = gzip.open(fileName, 'rb')
         file_content = file_content.read()
