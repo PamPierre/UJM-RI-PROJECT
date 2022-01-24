@@ -109,6 +109,6 @@ def weinting_function(pl, stat,k,b):
     return ltn,ltc,bm25_val
 
 def reverse_score(score_result):
-    score = sorted(score_result, reverse=False)
+    score = sorted(score_result, reverse=True)
     score = [(doc, result) for result, doc in score]
     return score

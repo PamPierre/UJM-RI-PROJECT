@@ -25,13 +25,14 @@ def result_query(num_query, rsv_result,team_name):
     return rsv_r
 
 
-# wf_index is [0,1,2]==['ltn','ltc','bm25']
-def create_run_file(run_id, wf_index, use_stem, use_stopword, k, b):
+# wf_index is [0,1,2]==['ltn','ltc','bm25','bm25_wilkinson']
+def create_run_file(run_id, wf_index,gran, use_stem, use_stopword, k, b):
     run_directory = "../assets/runs_result/"
     run_id += 1
     team_name = "DjibrilMohamedOmaimaDouae"
+    granularity = ['articles','elements']
     stem = ['nostem', 'porter', 'lovins', 'paice']
-    wf = ['ltn', 'ltc', 'bm25']
+    wf = ['ltn', 'ltc', 'bm25','bm25F_Wilkinson','bm25F_Robertson']
     st = stem[0]
     sw = 'nostop'
     stopwords = get_stop_words('english')
@@ -43,11 +44,11 @@ def create_run_file(run_id, wf_index, use_stem, use_stopword, k, b):
     if use_stem:
         st = stem[1]
         # name_Runid_wf_Granularity_use_Parameters.tx
-    run_file_name = '{}_{}_{}_element_sec_p_{}{}_{}'.format(team_name, run_id,
-                                                            wf[wf_index], sw,
+    run_file_name = '{}_{}_{}_{}_{}{}_{}'.format(team_name, run_id,
+                                                            wf[wf_index],granularity[gran],sw,
                                                             len_stop, st)
     # Cas du bm25
-    if (wf_index == 2):
+    if (wf_index >1):
         run_file_name = str(run_file_name + '_k{}_b{}'.format(k, b))
 
     run_file_path = str(run_directory + run_file_name + '.txt')
@@ -55,12 +56,12 @@ def create_run_file(run_id, wf_index, use_stem, use_stopword, k, b):
 
 
 # index is [0,1,2]==['ltn','ltc','bm25']
-def build_run_file(run_id, wf_score, index, use_stem, use_stopword, k, b):
+def build_run_file(run_id, wf_score, index,gran, use_stem, use_stopword, k, b):
     start = time.time()
     if index != 2:
         k = 0.0
         b = 0.0
-    run_file_name, run_id = create_run_file(run_id, index, use_stem, use_stopword, k, b)
+    run_file_name, run_id = create_run_file(run_id, index,gran, use_stem, use_stopword, k, b)
     print(len(wf_score))
     for score in wf_score:
         print(len(score))
