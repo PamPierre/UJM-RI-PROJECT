@@ -106,7 +106,6 @@ def weinting_function(pl, stat,k,b):
     ltn = smart_ltn(pl,stat['n_doc'], stat['colec_freq'])
     ltc = smart_ltc(ltn)
     bm25_val = bm25(pl,stat,k,b)
-   
     return ltn,ltc,bm25_val
 
 def reverse_score(score_result):
